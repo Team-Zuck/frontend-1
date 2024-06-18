@@ -32,7 +32,7 @@ const NavbarRoutes = () => {
               guest
             </>
           }</p>
-          <p className="text-xs">Accountant</p>
+          <p className="text-xs">Manager</p>
         </div>
       </div >
     </>
