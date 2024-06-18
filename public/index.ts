@@ -18,6 +18,9 @@ import social2 from "./images/social2.png";
 import message from "./icons/message.svg";
 import heart from "./icons/heart.svg";
 import trash from "./icons/trash.svg";
+import phone from "./icons/phone.svg";
+import video from "./icons/video.svg";
+import info from "./icons/info.svg";
 export {
   regImg,
   footerImg,
@@ -39,4 +42,7 @@ export {
   message,
   heart,
   trash,
+  phone,
+  video,
+  info,
 };
