@@ -122,3 +122,10 @@ export const applicationCard = [
     ],
   },
 ];
+
+// export const hrCard = [
+//   {
+//     label: "New Employee",
+//     icon:
+//   },
+// ];

@@ -13,12 +13,13 @@ import { bookMark, del, grid, pencil, task, todo } from "@/public";
 import { MoveLeft, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
+import toast from "react-hot-toast";
 
 const Task = () => {
   const [tasks, setTasks] = useState<any>([]);
@@ -28,8 +29,6 @@ const Task = () => {
   const [newTaskTag, setNewTaskTag] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
-  const dialogRef = useRef(null); // Ref for the dialog component
-
   const handleAddTask = async () => {
     if (newTaskTitle && newTaskDate) {
       try {
@@ -72,7 +71,6 @@ const Task = () => {
   }, []);
 
 
-
   const handleDeleteTask = async (taskId: any) => {
     try {
       await deleteDoc(doc(db, "applications/calendar/tasks", taskId));
@@ -81,22 +79,31 @@ const Task = () => {
       console.error("Error deleting document: ", error);
     }
   };
+  const handleEditTask = async () => {
+    if (selectedTaskId) {
+      try {
+        await setDoc(doc(db, "applications/calendar/tasks", selectedTaskId), {
+          title: newTaskTitle,
+          details: newTaskDetails,
+          date: newTaskDate,
+          tag: newTaskTag,
+        });
 
-  const handleEditTask = async (taskId: any) => {
-    const taskToUpdate = tasks.find((task: any) => task.id === taskId);
-    if (!taskToUpdate) return;
+        toast.success('Task updated successfully');
 
-    try {
-      await setDoc(doc(db, "applications/calendar/tasks", taskId), {
-        title: taskToUpdate.title,
-        details: taskToUpdate.details,
-        date: taskToUpdate.date,
-        tag: taskToUpdate.tag,
-      });
-    } catch (error) {
-      console.error("Error updating document: ", error);
+        setNewTaskTitle("");
+        setNewTaskDetails("");
+        setNewTaskDate("");
+        setNewTaskTag("");
+
+        setSelectedTaskId(null);
+        setIsDialogOpen(false);
+      } catch (error) {
+        console.error("Error updating document: ", error);
+      }
     }
   };
+
 
   const openDialogForEdit = (task: any) => {
     setSelectedTaskId(task.id);
@@ -106,6 +113,8 @@ const Task = () => {
     setNewTaskTag(task.tag);
     setIsDialogOpen(true);
   };
+
+
   return (
     <div className="w-full full">
       <div className="ml-[20px] xl:ml-[42px] flex items-center pt-[45px] gap-4">
@@ -116,47 +125,37 @@ const Task = () => {
       </div>
       <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-7">
         <div className="shadow-2xl w-[200px]">
-          <Dialog ref={dialogRef} open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="w-[200px] mt-4 flex items-center justify-center">
+                <Plus className="mr-2" />
+                New task
+              </Button>
+            </DialogTrigger>
             <DialogContent className="bg-white p-6 rounded-lg shadow-lg">
               <DialogTitle className="flex justify-center text-lg font-medium">
                 {selectedTaskId ? "Edit Task" : "Add Task"}
               </DialogTitle>
               <div className="mt-4">
-                <Label htmlFor="task-title">Task Title</Label>
-                <Input
-                  id="task-title"
-                  className="w-full mt-1"
-                  value={newTaskTitle}
+                <Label htmlFor="task-name">Add task</Label>
+                <Input value={newTaskTitle}
                   onChange={(e) => setNewTaskTitle(e.target.value)}
-                />
+                  id="task-name" className="w-full mt-1" />
               </div>
               <div className="mt-4">
-                <Label htmlFor="task-details">Task Details</Label>
-                <Textarea
-                  id="task-details"
-                  className="w-full mt-1"
-                  value={newTaskDetails}
-                  onChange={(e) => setNewTaskDetails(e.target.value)}
-                />
+                <Label htmlFor="task-details">Task details</Label>
+                <Textarea value={newTaskDetails}
+                  onChange={(e) => setNewTaskDetails(e.target.value)} id="task-details" className="w-full mt-1" />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-date">Select Date/Time</Label>
-                <Input
-                  id="task-date"
-                  type="date"
-                  className="w-full mt-1"
-                  value={newTaskDate}
-                  onChange={(e) => setNewTaskDate(e.target.value)}
-                />
+                <Input id="task-date" value={newTaskDate}
+                  onChange={(e) => setNewTaskDate(e.target.value)} type="date" className="w-full mt-1" />
               </div>
               <div className="mt-4">
-                <Label htmlFor="task-tag">Task Tag</Label>
-                <Input
-                  id="task-tag"
-                  className="w-full mt-1"
-                  value={newTaskTag}
-                  onChange={(e) => setNewTaskTag(e.target.value)}
-                />
+                <Label htmlFor="task-tag">Task tag</Label>
+                <Input value={newTaskTag}
+                  onChange={(e) => setNewTaskTag(e.target.value)} id="task-tag" className="w-full mt-1" />
               </div>
               <DialogFooter className="mt-6 flex justify-end space-x-2">
                 <DialogClose asChild>
@@ -164,9 +163,14 @@ const Task = () => {
                     Close
                   </Button>
                 </DialogClose>
-                <Button type="button" variant="ghost" onClick={handleAddTask}>
-                  {selectedTaskId ? "Update Task" : "Save Changes"}
-                </Button>
+                <DialogClose asChild>
+                  <Button type="button" variant="ghost" onClick={() => {
+
+                    { selectedTaskId ? handleEditTask(selectedTaskId) : handleAddTask() }
+                  }}>
+                    Save Changes
+                  </Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -197,8 +201,8 @@ const Task = () => {
           <h1 className="font-medium ">All task</h1>
           <Table>
             <TableBody>
-              {tasks.map((task: any) => (
-                <TableRow key={task.id}>
+              {tasks.map((task: any, index: any) => (
+                <TableRow key={index}>
                   <TableCell className="font-medium flex flex-col">
                     {task.title}
                     <span className="text-[#4CAF50]">ASSIGNED BY: MANAGER</span>
@@ -213,8 +217,12 @@ const Task = () => {
                         height={15}
                         alt="pencil"
                         onClick={() => {
-                          openDialogForEdit(task); // Call function to open dialog for editing
-                          if (dialogRef.current) dialogRef.current.open(); // Open dialog programmatically
+                          setSelectedTaskId(task.id);
+                          setNewTaskTitle(task.title);
+                          setNewTaskDetails(task.details);
+                          setNewTaskDate(task.date);
+                          setNewTaskTag(task.tag);
+                          setIsDialogOpen(true); // Open dialog for editing
                         }}
                       />
                       <Image
@@ -232,7 +240,7 @@ const Task = () => {
           </Table>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

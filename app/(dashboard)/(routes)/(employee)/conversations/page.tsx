@@ -30,7 +30,7 @@ const Conversations = () => {
         <h1 className="text-lg text-[#244469]">Applications/Conversations</h1>
       </div>
       <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-4">
-        <Tabs defaultValue={'contacts'} className="w-full h-full">
+        <Tabs defaultValue="account" className="w-full h-full">
           <div className="w-[90%] mx-auto bg-[#E3E3E3] rounded-lg p-2">
             <div className="flex justify-between items-center">
               <div className="flex gap-x-2 items-center">
