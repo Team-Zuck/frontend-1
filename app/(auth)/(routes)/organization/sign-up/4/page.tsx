@@ -91,13 +91,14 @@ const SignUp4 = () => {
               </ul>
             </div>
           )}
-
-          <Button
-            onClick={handleSubmitFiles}
-            className="mt-4 bg-[#363636] text-white w-full"
-          >
-            Next
-          </Button>
+          <Link href="/organization/hr">
+            <Button
+              onClick={handleSubmitFiles}
+              className="mt-4 bg-[#363636] text-white w-full"
+            >
+              Next
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="relative flex-1 hidden xl:flex">
