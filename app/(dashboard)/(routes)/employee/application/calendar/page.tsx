@@ -7,7 +7,8 @@ import { MoveLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-
+import { db } from "@/firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 const Calendar = () => {
   const [events, setEvents] = useState([{ title: "", date: "" }]);
   const [newEventTitle, setNewEventTitle] = useState("");
@@ -17,9 +18,12 @@ const Calendar = () => {
     alert(arg.dateStr);
   };
 
-  const handleAddEvent = () => {
+
+
+  const handleAddEvent = async () => {
     if (newEventTitle && newEventDate) {
       setEvents([...events, { title: newEventTitle, date: newEventDate }]);
+      const docRef = await addDoc(collection(db, `applications/calender`), { events })
       setNewEventTitle("");
       setNewEventDate("");
     }

@@ -18,11 +18,12 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { app } from "@/app/firebase/firebaseConfig";
+
 
 import { log } from "console";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { app } from "@/firebaseConfig";
 
 
 const formSchema = z.object({

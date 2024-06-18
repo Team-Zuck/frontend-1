@@ -8,13 +8,11 @@ import Image from "next/image";
 import { profile } from "@/public";
 import SearchInput from "./SearchInput";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/firebaseConfig";
 import { AiOutlineUser } from 'react-icons/ai'
+import { auth } from "@/firebaseConfig";
 
 const NavbarRoutes = () => {
   const [user, loading, error] = useAuthState(auth);
-
-
 
   return (
     <>
