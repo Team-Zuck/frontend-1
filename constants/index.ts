@@ -1,3 +1,4 @@
+import { employee, employees, salary, trend } from "@/public";
 import {
   BarChart2,
   Bell,
@@ -123,9 +124,33 @@ export const applicationCard = [
   },
 ];
 
-// export const hrCard = [
-//   {
-//     label: "New Employee",
-//     icon:
-//   },
-// ];
+export const hrCard = [
+  {
+    label: "New Employee",
+    icon: employee,
+    number: "21",
+    trend: trend,
+    text: "Analytics for last week",
+  },
+  {
+    label: "Total Employee",
+    icon: employees,
+    number: "21",
+    trend: trend,
+    text: "Analytics for last year",
+  },
+  {
+    label: "Total Salary",
+    icon: salary,
+    number: "21",
+    trend: trend,
+    text: "Analytics for last month",
+  },
+  {
+    label: "AVG Salary",
+    icon: salary,
+    number: "21",
+    trend: trend,
+    text: "Analytics for last month",
+  },
+];
