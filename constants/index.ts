@@ -1,6 +1,7 @@
 import {
   BarChart2,
   Bell,
+  BriefcaseBusiness,
   Calendar,
   CalendarHeart,
   Check,
@@ -13,7 +14,7 @@ import {
   TrainFront,
 } from "lucide-react";
 
-export const routes = [
+export const employeeRoutes = [
   {
     icon: Home,
     label: "Dashboard",
@@ -27,6 +28,33 @@ export const routes = [
   {
     icon: Bell,
     label: "Conversations",
+    route: "/conversations",
+  },
+  {
+    icon: BarChart2,
+    label: "Performance",
+    route: "/performance",
+  },
+  {
+    icon: SettingsIcon,
+    label: "Settings",
+    route: "/settings",
+  },
+];
+export const organizationRoutes = [
+  {
+    icon: Home,
+    label: "Human Resources",
+    route: "/organization/hr",
+  },
+  {
+    icon: BriefcaseBusiness,
+    label: "Employment Details",
+    route: "/organization/employeeDetails",
+  },
+  {
+    icon: Bell,
+    label: "Report and analysis",
     route: "/conversations",
   },
   {
