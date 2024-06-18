@@ -30,46 +30,44 @@ const Task = () => {
       <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-7">
         <div className="shadow-2xl w-[200px]">
           <Dialog>
-            <DialogTrigger className="w-[200px]">
-              <Button className="w-full mt-4">
-                <Plus />
+            <DialogTrigger asChild>
+              <Button className="w-[200px] mt-4 flex items-center justify-center">
+                <Plus className="mr-2" />
                 New task
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-white">
-              <DialogTitle className="flex justify-center">
+            <DialogContent className="bg-white p-6 rounded-lg shadow-lg">
+              <DialogTitle className="flex justify-center text-lg font-medium">
                 Add task
               </DialogTitle>
               <div className="mt-4">
                 <Label htmlFor="task-name">Add task</Label>
-                <Input id="task-name" />
+                <Input id="task-name" className="w-full mt-1" />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-details">Task details</Label>
-                <Textarea id="task-details" />
+                <Textarea id="task-details" className="w-full mt-1" />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-date">Select Date/Time</Label>
-                <Input id="task-date" type="date" />
+                <Input id="task-date" type="date" className="w-full mt-1" />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-tag">Task tag</Label>
-                <Input id="task-tag" />
+                <Input id="task-tag" className="w-full mt-1" />
               </div>
-              <div className="mt-4 flex justify-end">
-                <DialogFooter className="sm:justify-start">
-                  <DialogClose asChild>
-                    <Button type="button" variant="secondary">
-                      Close
-                    </Button>
-                  </DialogClose>
-                  <DialogClose asChild>
-                    <Button type="button" variant="ghost">
-                      Save Changes
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </div>
+              <DialogFooter className="mt-6 flex justify-end space-x-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Close
+                  </Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button type="button" variant="ghost">
+                    Save Changes
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
           <div className="flex gap-y-[17px] xl:pt-[33px] xl:flex-col ">
