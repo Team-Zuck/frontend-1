@@ -17,8 +17,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-
-import { app } from "@/app/firebase/firebaseConfig";
+import { app } from "@/firebaseConfig";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";

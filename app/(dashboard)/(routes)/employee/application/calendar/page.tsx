@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Timestamp, addDoc, collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from "@/firebaseConfig";
 
 const Calendar = () => {
   const [events, setEvents] = useState([{ title: "", date: "" }]);
