@@ -1,4 +1,4 @@
-import { applicationCard } from "@/constants";
+import { applicationCard, hrCard } from "@/constants";
 import Link from "next/link";
 import React from "react";
 import Card from "./_components/Card";
@@ -15,17 +15,15 @@ const HR = () => {
         className="bg-white w-[98%] h-[800px] flex flex-wrap gap-8 p-[65px] "
         style={{ marginLeft: "2%" }}
       >
-        {applicationCard.map((card, index) => (
-          <Link href={`/${card.route}`}>
+        {/* {hrCard.map((card, index) => (
             <Card
               key={index}
               icon={card.icon}
               label={card.label}
-              textArr={card.textArr}
-              color={card.color}
+              number={card.number}
+              trend={card.trend}
             />
-          </Link>
-        ))}
+        ))} */}
       </div>
     </div>
   );

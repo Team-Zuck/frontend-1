@@ -25,6 +25,7 @@ import employee from "./icons/employee.svg";
 import employees from "./icons/employees.svg";
 import salary from "./icons/salary.svg";
 import analysis from "./icons/analysis.svg";
+import trend from "./icons/trend.svg";
 export {
   regImg,
   footerImg,
@@ -51,4 +52,7 @@ export {
   info,
   employee,
   employees,
+  salary,
+  analysis,
+  trend,
 };
