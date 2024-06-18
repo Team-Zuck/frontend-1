@@ -72,7 +72,7 @@ export const applicationCard = [
   },
   {
     icon: ListTodo,
-    color: "yellow",
+    color: "#F8D108",
     label: "To-do list",
     route: "application/to-do",
     textArr: ["Create Your To do list"],
