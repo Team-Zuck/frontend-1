@@ -166,7 +166,7 @@ const Task = () => {
                 <DialogClose asChild>
                   <Button type="button" variant="ghost" onClick={() => {
 
-                    { selectedTaskId ? handleEditTask(selectedTaskId) : handleAddTask() }
+                    { selectedTaskId ? handleEditTask() : handleAddTask() }
                   }}>
                     Save Changes
                   </Button>

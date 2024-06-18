@@ -71,3 +71,13 @@
     @apply border-border;
   }
 }
+
+.fc-event-title {
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-event {
+  display: block;
+}
