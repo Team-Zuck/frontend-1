@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { feed, page, people, setting, social1, social2 } from "@/public";
 import { MoveLeft } from "lucide-react";
