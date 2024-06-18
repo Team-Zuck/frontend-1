@@ -18,7 +18,7 @@ const Application = () => {
         style={{ marginLeft: "2%" }}
       >
         {applicationCard.map((card, index) => (
-          <Link href={`/employee/${card.route}`}>
+          <Link href={`/${card.route}`}>
             <Card
               key={index}
               icon={card.icon}
