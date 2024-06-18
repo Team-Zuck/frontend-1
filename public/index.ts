@@ -21,6 +21,10 @@ import trash from "./icons/trash.svg";
 import phone from "./icons/phone.svg";
 import video from "./icons/video.svg";
 import info from "./icons/info.svg";
+import employee from "./icons/employee.svg";
+import employees from "./icons/employees.svg";
+import salary from "./icons/salary.svg";
+import analysis from "./icons/analysis.svg";
 export {
   regImg,
   footerImg,
@@ -45,4 +49,6 @@ export {
   phone,
   video,
   info,
+  employee,
+  employees,
 };
