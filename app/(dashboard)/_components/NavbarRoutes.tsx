@@ -7,21 +7,36 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { profile } from "@/public";
 import SearchInput from "./SearchInput";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/firebaseConfig";
+import { AiOutlineUser } from 'react-icons/ai'
 
 const NavbarRoutes = () => {
+  const [user, loading, error] = useAuthState(auth);
+
+
+
   return (
     <>
       <div className="hidden md:block">
         <SearchInput />
       </div>
       <div className="flex gap-2 ml-auto">
-        <Image src={profile} width={30} height={30} alt="profile" />
 
+        {user?.photoURL ? <Image src={user && user.photoURL} width={30} height={30} className="rounded-full " alt="profile" />
+          :
+          <AiOutlineUser size={30} />}
         <div>
-          <p className="text-sm">James Johnson</p>
+          <p className="text-sm">{user ? <>
+            {user?.displayName ? user.displayName : user?.email}
+          </> :
+            <>
+              guest
+            </>
+          }</p>
           <p className="text-xs">Accountant</p>
         </div>
-      </div>
+      </div >
     </>
   );
 };

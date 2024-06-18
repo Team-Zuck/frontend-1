@@ -4,12 +4,23 @@ import { footerImg, logo, regImg } from "@/public";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/auth';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { toast } from 'sonner'
 
 const Register = () => {
+
   const router = useRouter();
-  const handleSignUp = () => {
-    router.push("/sign-up");
+  const handleSignUp = async () => {
+    try {
+
+      router.push("/sign-up");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+
   return (
     <div className="flex w-full h-screen">
       <div className="flex-1 flex flex-col h-full pt-[68px]">
