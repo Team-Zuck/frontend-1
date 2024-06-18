@@ -1,6 +1,6 @@
 import regImg from "./images/registerImg.avif";
 import footerImg from "./images/footerImg.png";
-import logo from "./images/logo.svg";
+import logo from "./images/logo.png";
 import google from "./icons/google.svg";
 import profile from "./images/profile.svg";
 import feed from "./icons/feed.svg";

@@ -4,22 +4,25 @@ import { footerImg, logo, regImg } from "@/public";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/auth';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { toast } from 'sonner'
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { toast } from "sonner";
+import Link from "next/link";
 
 const Register = () => {
-
   const router = useRouter();
   const handleSignUp = async () => {
     try {
-
       router.push("/sign-up");
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <div className="flex w-full h-screen">
@@ -37,20 +40,19 @@ const Register = () => {
             </span>
           </div>
           <div className="w-[80%] flex flex-col mt-[60px] gap-y-[40px] z-10">
-            <Button
-              size="lg"
-              className="bg-[#363636] rounded-none hover:bg-[#363636] hover:text-white cursor-pointer"
-              onClick={handleSignUp}
-            >
-              Organization
-            </Button>
-            <Button
-              size="lg"
-              className="rounded-none cursor-pointer"
-              onClick={handleSignUp}
-            >
-              Employee
-            </Button>
+            <Link href="/organization/sign-in" className="block w-full">
+              <Button
+                size="lg"
+                className="w-full bg-[#363636] rounded-none hover:bg-[#363636] hover:text-white cursor-pointer"
+              >
+                Organization
+              </Button>
+            </Link>
+            <Link href="/sign-in" className="block w-full">
+              <Button size="lg" className="w-full rounded-none cursor-pointer">
+                Employee
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
