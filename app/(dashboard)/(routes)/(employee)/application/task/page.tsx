@@ -17,7 +17,14 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "@/firebaseConfig";
 import toast from "react-hot-toast";
 
@@ -33,15 +40,26 @@ const Task = () => {
     if (newTaskTitle && newTaskDate) {
       try {
         // Add the new task to Firestore
-        const docRef = await addDoc(collection(db, "applications/calendar/tasks"), {
-          title: newTaskTitle,
-          details: newTaskDetails,
-          date: newTaskDate,
-          tag: newTaskTag,
-        });
+        const docRef = await addDoc(
+          collection(db, "applications/calendar/tasks"),
+          {
+            title: newTaskTitle,
+            details: newTaskDetails,
+            date: newTaskDate,
+            tag: newTaskTag,
+          }
+        );
 
         // Update the local state with the new task
-        setTasks([...tasks, { title: newTaskTitle, details: newTaskDetails, date: newTaskDate, tag: newTaskTag }]);
+        setTasks([
+          ...tasks,
+          {
+            title: newTaskTitle,
+            details: newTaskDetails,
+            date: newTaskDate,
+            tag: newTaskTag,
+          },
+        ]);
 
         // Clear the input fields
         setNewTaskTitle("");
@@ -57,19 +75,20 @@ const Task = () => {
     }
   };
 
-
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "applications/calendar/tasks"), (snapshot) => {
-      const fetchedTasks = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTasks(fetchedTasks);
-    });
+    const unsubscribe = onSnapshot(
+      collection(db, "applications/calendar/tasks"),
+      (snapshot) => {
+        const fetchedTasks = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTasks(fetchedTasks);
+      }
+    );
 
     return () => unsubscribe(); // Unsubscribe from snapshot listener when component unmounts
   }, []);
-
 
   const handleDeleteTask = async (taskId: any) => {
     try {
@@ -79,7 +98,7 @@ const Task = () => {
       console.error("Error deleting document: ", error);
     }
   };
-  const handleEditTask = async () => {
+  const handleEditTask = async (selectedTaskId: any) => {
     if (selectedTaskId) {
       try {
         await setDoc(doc(db, "applications/calendar/tasks", selectedTaskId), {
@@ -89,7 +108,7 @@ const Task = () => {
           tag: newTaskTag,
         });
 
-        toast.success('Task updated successfully');
+        toast.success("Task updated successfully");
 
         setNewTaskTitle("");
         setNewTaskDetails("");
@@ -104,7 +123,6 @@ const Task = () => {
     }
   };
 
-
   const openDialogForEdit = (task: any) => {
     setSelectedTaskId(task.id);
     setNewTaskTitle(task.title);
@@ -113,7 +131,6 @@ const Task = () => {
     setNewTaskTag(task.tag);
     setIsDialogOpen(true);
   };
-
 
   return (
     <div className="w-full full">
@@ -138,24 +155,40 @@ const Task = () => {
               </DialogTitle>
               <div className="mt-4">
                 <Label htmlFor="task-name">Add task</Label>
-                <Input value={newTaskTitle}
+                <Input
+                  value={newTaskTitle}
                   onChange={(e) => setNewTaskTitle(e.target.value)}
-                  id="task-name" className="w-full mt-1" />
+                  id="task-name"
+                  className="w-full mt-1"
+                />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-details">Task details</Label>
-                <Textarea value={newTaskDetails}
-                  onChange={(e) => setNewTaskDetails(e.target.value)} id="task-details" className="w-full mt-1" />
+                <Textarea
+                  value={newTaskDetails}
+                  onChange={(e) => setNewTaskDetails(e.target.value)}
+                  id="task-details"
+                  className="w-full mt-1"
+                />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-date">Select Date/Time</Label>
-                <Input id="task-date" value={newTaskDate}
-                  onChange={(e) => setNewTaskDate(e.target.value)} type="date" className="w-full mt-1" />
+                <Input
+                  id="task-date"
+                  value={newTaskDate}
+                  onChange={(e) => setNewTaskDate(e.target.value)}
+                  type="date"
+                  className="w-full mt-1"
+                />
               </div>
               <div className="mt-4">
                 <Label htmlFor="task-tag">Task tag</Label>
-                <Input value={newTaskTag}
-                  onChange={(e) => setNewTaskTag(e.target.value)} id="task-tag" className="w-full mt-1" />
+                <Input
+                  value={newTaskTag}
+                  onChange={(e) => setNewTaskTag(e.target.value)}
+                  id="task-tag"
+                  className="w-full mt-1"
+                />
               </div>
               <DialogFooter className="mt-6 flex justify-end space-x-2">
                 <DialogClose asChild>
@@ -164,10 +197,19 @@ const Task = () => {
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button type="button" variant="ghost" onClick={() => {
 
-                    { selectedTaskId ? handleEditTask() : handleAddTask() }
-                  }}>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => {
+                      {
+                        selectedTaskId
+                          ? handleEditTask(selectedTaskId)
+                          : handleAddTask();
+                      }
+                    }}
+                  >
+
                     Save Changes
                   </Button>
                 </DialogClose>
@@ -195,7 +237,7 @@ const Task = () => {
           </div>
         </div>
         <div
-          className="bg-white w-full xl:w-[70%] h-[800px] border border-dotted border-[#5C5C5C] px-[24px] py-[10px] rounded-[20px]"
+          className="bg-white w-full xl:w-[70%] min-h-[800px] border border-dotted border-[#5C5C5C] px-[24px] py-[10px] rounded-[20px]"
           style={{ boxShadow: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)" }}
         >
           <h1 className="font-medium ">All task</h1>
@@ -240,7 +282,7 @@ const Task = () => {
           </Table>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

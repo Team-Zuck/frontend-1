@@ -1,5 +1,15 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -14,13 +24,9 @@ import { heart, info, message, phone, profile, trash, video } from "@/public";
 import { MoveLeft, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 
 const Conversations = () => {
-
-  useEffect(() => {
-
-  }, [])
   return (
     <div className="w-full full">
       <div className="ml-[20px] xl:ml-[42px] flex items-center pt-[45px] gap-4">
@@ -29,8 +35,8 @@ const Conversations = () => {
         </Link>
         <h1 className="text-lg text-[#244469]">Applications/Conversations</h1>
       </div>
-      <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-4">
-        <Tabs defaultValue="account" className="w-full h-full">
+      <div className="flex bg-white w-full justify-between xl:mt-[55px] pr-4 flex-col xl:flex-row h-full pt-4">
+        <Tabs defaultValue="contacts" className="w-full h-full">
           <div className="w-[90%] mx-auto bg-[#E3E3E3] rounded-lg p-2">
             <div className="flex justify-between items-center">
               <div className="flex gap-x-2 items-center">
@@ -41,8 +47,7 @@ const Conversations = () => {
                   className="rounded-full"
                   alt="user"
                 />
-
-                <div className="">
+                <div>
                   <p className="text-[#244469] text-[16px] font-semibold">
                     James Johnson
                   </p>
@@ -54,18 +59,51 @@ const Conversations = () => {
                   </p>
                 </div>
               </div>
-              <Button>
-                <Plus />
-                Add contact
-              </Button>
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>
+                    <Plus />
+                    Add contact
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-white p-6 rounded-lg shadow-lg">
+                  <DialogTitle className="flex justify-center text-lg font-medium">
+                    Add contact
+                  </DialogTitle>
+                  <div className="mt-4">
+                    <Label htmlFor="name">Name</Label>
+                    <Input id="name" className="w-full mt-1" />
+                  </div>
+                  <div className="mt-4">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" className="w-full mt-1" />
+                  </div>
+                  <div className="mt-4">
+                    <Label htmlFor="position">Position</Label>
+                    <Input id="position" className="w-full mt-1" />
+                  </div>
+                  <DialogFooter className="mt-6 flex justify-end space-x-2">
+                    <DialogClose asChild>
+                      <Button type="button" variant="destructive">
+                        Close
+                      </Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button type="button" variant="secondary">
+                        Save Contact
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
-            <TabsList defaultValue={'contacts'} className="flex justify-between bg-[#E3E3E3]">
-              <TabsList defaultValue={'contacts'}>
+            <TabsList className="flex justify-between bg-[#E3E3E3]">
+              <div>
                 <TabsTrigger value="contacts">My Contacts</TabsTrigger>
                 <TabsTrigger value="groups">My Groups</TabsTrigger>
                 <TabsTrigger value="favorites">Favorites</TabsTrigger>
-              </TabsList>
-
+              </div>
               <div>
                 <Button variant="ghost">
                   <Image src={phone} width={16} height={16} alt="phone" />
@@ -79,7 +117,7 @@ const Conversations = () => {
               </div>
             </TabsList>
           </div>
-          <TabsContent defaultValue={'contacts'} value="contacts">
+          <TabsContent value="contacts">
             <div className="bg-white w-[95%] mx-auto h-fit min-h-[800px] border border-dotted border-[#5C5C5C] px-[24px] py-[10px] rounded-[20px]">
               <Table>
                 <TableHeader>
@@ -91,272 +129,37 @@ const Conversations = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Raphael Onunkwor
-                    </TableCell>
-                    <TableCell>raphael.onun@gmail.com</TableCell>
-                    <TableCell>Software Developer</TableCell>
-                    <TableCell className="text-right ">
-                      <span className="flex justify-end gap-x-2">
-                        <Image src={heart} width={15} height={15} alt="icon" />
-                        <Image
-                          src={message}
-                          width={15}
-                          height={15}
-                          alt="icon"
-                        />
-                        <Image src={trash} width={15} height={15} alt="icon" />
-                      </span>
-                    </TableCell>
-                  </TableRow>
+                  {Array(10).fill(
+                    <TableRow>
+                      <TableCell className="font-medium">
+                        Raphael Onunkwor
+                      </TableCell>
+                      <TableCell>raphael.onun@gmail.com</TableCell>
+                      <TableCell>Software Developer</TableCell>
+                      <TableCell className="text-right">
+                        <span className="flex justify-end gap-x-2">
+                          <Image
+                            src={heart}
+                            width={15}
+                            height={15}
+                            alt="icon"
+                          />
+                          <Image
+                            src={message}
+                            width={15}
+                            height={15}
+                            alt="icon"
+                          />
+                          <Image
+                            src={trash}
+                            width={15}
+                            height={15}
+                            alt="icon"
+                          />
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </div>

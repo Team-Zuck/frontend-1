@@ -1,33 +1,27 @@
-import { LucideIcon } from "lucide-react";
+import React from "react";
 
 interface CardProps {
-  icon: LucideIcon;
-  color: string;
+  icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   label: string;
-  textArr: string[];
+  number: string;
+  trend: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  text: string;
 }
 
-const Card = ({ icon: Icon, color, label, textArr }: CardProps) => {
+const Card = ({ icon: Icon, label, number, trend: Trend, text }: CardProps) => {
   return (
-    <div className="w-[250px] h-[184px] rounded-[15px] bg-white shadow-md p-4">
-      <div
-        className="w-10 h-10 flex items-center justify-center rounded-full"
-        style={{ backgroundColor: color }}
-      >
-        <Icon className="text-white" />
+    <div className="w-[211px] h-[118px] rounded-[15px] bg-white shadow-md p-4">
+      <div className="flex gap-x-2 items-center">
+        <span className="text-[16px] font-medium">{label}</span>
+        <Icon className="h-6 w-6" />
       </div>
-      <div className="mt-4">
-        <h3 className="text-lg font-bold" style={{ color: color }}>
-          {label}
-        </h3>
-        <ul className="mt-2 space-y-1">
-          {textArr.map((text, index) => (
-            <li key={index} className="text-sm text-gray-600">
-              {text}
-            </li>
-          ))}
-        </ul>
+      <div className="flex items-center">
+        <span className="font-semibold text-[24px]">{number}</span>
+        <span className="flex gap-x-2">
+          <Trend className="h-6 w-6" /> 15%
+        </span>
       </div>
+      <p>{text}</p>
     </div>
   );
 };
