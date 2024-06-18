@@ -5,10 +5,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { db } from "@/firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 const Calendar = () => {
   const [events, setEvents] = useState([{ title: "", date: "" }]);
   const [newEventTitle, setNewEventTitle] = useState("");
@@ -22,12 +22,32 @@ const Calendar = () => {
 
   const handleAddEvent = async () => {
     if (newEventTitle && newEventDate) {
-      setEvents([...events, { title: newEventTitle, date: newEventDate }]);
-      const docRef = await addDoc(collection(db, `applications/calender`), { events })
-      setNewEventTitle("");
-      setNewEventDate("");
+      try {
+        // Add the new event to Firestore
+        const docRef = await addDoc(collection(db, 'applications/calendar/events'), {
+          title: newEventTitle,
+          date: newEventDate
+        });
+        setEvents([...events, { title: newEventTitle, date: newEventDate }]);
+        setNewEventTitle("");
+        setNewEventDate("");
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
     }
   };
+  useEffect(() => {
+    const q = query(collection(db, 'applications/calendar/events'));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const eventsData: any = snapshot.docs.map((doc) => doc.data());
+      setEvents(eventsData);
+      console.log(eventsData);
+
+    });
+    return () => unsub();
+  }, []);
+
+
   return (
     <div className="w-full full">
       <div className="ml-[20px] xl:ml-[42px] flex items-center pt-[45px] gap-4">
