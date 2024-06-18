@@ -22,22 +22,22 @@ export const routes = [
   {
     icon: Grid,
     label: "Applications",
-    route: "/employee/application",
+    route: "/application",
   },
   {
     icon: Bell,
     label: "Conversations",
-    route: "/employee/conversations",
+    route: "/conversations",
   },
   {
     icon: BarChart2,
     label: "Performance",
-    route: "/employee/performance",
+    route: "/performance",
   },
   {
     icon: SettingsIcon,
     label: "Settings",
-    route: "/employee/settings",
+    route: "/settings",
   },
 ];
 

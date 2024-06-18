@@ -18,12 +18,12 @@ const Calendar = () => {
     alert(arg.dateStr);
   };
 
-
-
   const handleAddEvent = async () => {
     if (newEventTitle && newEventDate) {
       setEvents([...events, { title: newEventTitle, date: newEventDate }]);
-      const docRef = await addDoc(collection(db, `applications/calender`), { events })
+      const docRef = await addDoc(collection(db, `applications/calender`), {
+        events,
+      });
       setNewEventTitle("");
       setNewEventDate("");
     }
@@ -31,7 +31,7 @@ const Calendar = () => {
   return (
     <div className="w-full full">
       <div className="ml-[20px] xl:ml-[42px] flex items-center pt-[45px] gap-4">
-        <Link href="/employee/application">
+        <Link href="/application">
           <MoveLeft className="size-6 text-primary" />
         </Link>
         <h1 className="text-lg text-[#244469]">Applications/Calendar</h1>
