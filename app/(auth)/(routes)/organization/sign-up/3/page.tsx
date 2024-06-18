@@ -46,7 +46,7 @@ const formSchema = z.object({
   }),
 });
 
-const SignUp2 = () => {
+const SignUp3 = () => {
   const auth = getAuth(app);
 
   const [user, loading, error] = useAuthState(auth);
@@ -165,4 +165,4 @@ const SignUp2 = () => {
   );
 };
 
-export default SignUp2;
+export default SignUp3;
