@@ -23,6 +23,8 @@ const Calendar = () => {
       setNewEventTitle("");
       setNewEventDate("");
     }
+
+
   };
   return (
     <div className="w-full full">
