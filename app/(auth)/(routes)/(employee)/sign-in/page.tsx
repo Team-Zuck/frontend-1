@@ -36,11 +36,15 @@ const SignIn = () => {
   const auth = getAuth(app);
   const [user, loading, error] = useAuthState(auth);
 
+  console.log(user);
 
 
   useEffect(() => {
-    navigate.push('/application')
-  }, [user])
+    if (user?.displayName) {
+      navigate.push('/application')
+    }
+
+  }, [user?.displayName])
   // 1. Define your form.
 
   const form = useForm<z.infer<typeof formSchema>>({

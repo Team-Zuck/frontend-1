@@ -23,10 +23,14 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  orderBy,
+  query,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
-import { db } from "@/firebaseConfig";
+import { auth, db } from "@/firebaseConfig";
 import toast from "react-hot-toast";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Task = () => {
   const [tasks, setTasks] = useState<any>([]);
@@ -35,13 +39,15 @@ const Task = () => {
   const [newTaskDate, setNewTaskDate] = useState("");
   const [newTaskTag, setNewTaskTag] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<any>(null);
+  const [user, loading, error] = useAuthState(auth);
+
   const handleAddTask = async () => {
     if (newTaskTitle && newTaskDate) {
       try {
         // Add the new task to Firestore
         const docRef = await addDoc(
-          collection(db, "applications/calendar/tasks"),
+          collection(db, `applications/tasks/${user?.uid}`),
           {
             title: newTaskTitle,
             details: newTaskDetails,
@@ -75,53 +81,80 @@ const Task = () => {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(db, "applications/calendar/tasks"),
-      (snapshot) => {
-        const fetchedTasks = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setTasks(fetchedTasks);
-      }
-    );
-
-    return () => unsubscribe(); // Unsubscribe from snapshot listener when component unmounts
-  }, []);
-
-  const handleDeleteTask = async (taskId: any) => {
-    try {
-      await deleteDoc(doc(db, "applications/calendar/tasks", taskId));
-      setTasks(tasks.filter((task: any) => task.id !== taskId));
-    } catch (error) {
-      console.error("Error deleting document: ", error);
-    }
-  };
-  const handleEditTask = async (selectedTaskId: any) => {
-    if (selectedTaskId) {
+  const handleEditTask = async (taskId: string) => {
+    if (newTaskTitle && newTaskDate && taskId) {
       try {
-        await setDoc(doc(db, "applications/calendar/tasks", selectedTaskId), {
+        const taskRef = doc(db, `applications/tasks/${user?.uid}/${taskId}`);
+
+        await updateDoc(taskRef, {
           title: newTaskTitle,
           details: newTaskDetails,
           date: newTaskDate,
           tag: newTaskTag,
         });
 
-        toast.success("Task updated successfully");
+        // Update local state with the edited task
+        const updatedTasks = tasks.map((task: any) => {
+          if (task.id === taskId) {
+            return {
+              ...task,
+              title: newTaskTitle,
+              details: newTaskDetails,
+              date: newTaskDate,
+              tag: newTaskTag,
+            };
+          }
+          return task;
+        });
+        setTasks(updatedTasks);
 
+        // Clear input fields and reset state
         setNewTaskTitle("");
         setNewTaskDetails("");
         setNewTaskDate("");
         setNewTaskTag("");
 
-        setSelectedTaskId(null);
+        // Close the dialog or reset editing state
         setIsDialogOpen(false);
+        setSelectedTaskId(null); // Reset selected task after edit
       } catch (error) {
         console.error("Error updating document: ", error);
       }
     }
   };
+
+
+  const handleDeleteTask = async (taskId: string) => {
+    try {
+      await deleteDoc(doc(db, `applications/tasks/${user?.uid}/${taskId}`));
+
+      // Update local state by removing the deleted task
+      const updatedTasks = tasks.filter((task: any) => task.id !== taskId);
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
+  };
+
+  useEffect(() => {
+    // Construct a query to fetch tasks ordered by 'date' in descending order
+    const q = query(
+      collection(db, `applications/tasks/${user?.uid}`),
+      orderBy('date', 'desc')
+    );
+
+    // Subscribe to the query and listen for snapshot changes
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetchedTasks = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTasks(fetchedTasks);
+    });
+
+    return () => unsubscribe(); // Unsubscribe from snapshot listener when component unmounts
+  }, [user]); // Re-subscribe to tasks when user changes
+
 
   const openDialogForEdit = (task: any) => {
     setSelectedTaskId(task.id);
@@ -197,6 +230,7 @@ const Task = () => {
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
+
                   <Button
                     type="button"
                     variant="ghost"
@@ -208,6 +242,7 @@ const Task = () => {
                       }
                     }}
                   >
+
                     Save Changes
                   </Button>
                 </DialogClose>

@@ -14,6 +14,7 @@ import {
   SettingsIcon,
   TrainFront,
 } from "lucide-react";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export const employeeRoutes = [
   {
@@ -41,6 +42,11 @@ export const employeeRoutes = [
     label: "Settings",
     route: "/settings",
   },
+  {
+    icon: AiOutlineLogout,
+    label: "Logout",
+    route: "#",
+  },
 ];
 export const organizationRoutes = [
   {
@@ -67,6 +73,11 @@ export const organizationRoutes = [
     icon: SettingsIcon,
     label: "Settings",
     route: "/settings",
+  },
+  {
+    icon: AiOutlineLogout,
+    label: "Logout",
+    route: "#",
   },
 ];
 
