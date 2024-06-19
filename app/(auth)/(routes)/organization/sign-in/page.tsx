@@ -12,11 +12,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { footerImg, google, logo, regImg } from "@/public";
+import { footerImg, google, logo, orgImg, regImg } from "@/public";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { app } from "@/firebaseConfig";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -31,20 +36,17 @@ const formSchema = z.object({
   }),
 });
 const SignIn = () => {
-
   const navigate = useRouter();
   const auth = getAuth(app);
   const [user, loading, error] = useAuthState(auth);
 
   console.log(user);
 
-
   useEffect(() => {
     if (user?.displayName) {
-      navigate.push('/application')
+      navigate.push("/application");
     }
-
-  }, [user?.displayName])
+  }, [user?.displayName]);
   // 1. Define your form.
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,17 +61,20 @@ const SignIn = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+
+    toast.success("Event has been created");
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        toast.success(' successfully signed in')
+        toast.success(" successfully signed in");
         navigate.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        toast.error(errorMessage)
+        toast.error(errorMessage);
       });
 
     console.log(values);
@@ -80,15 +85,12 @@ const SignIn = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       console.log(result);
-      toast.success('successfully signed in')
+      toast.success("successfully signed in");
       navigate.push("/");
-
     } catch (error) {
       console.log(error);
-
     }
-
-  }
+  };
   return (
     <div className="flex w-full h-screen">
       <div className="flex-1 flex flex-col h-full pt-[43px]">
@@ -152,7 +154,10 @@ const SignIn = () => {
                 or
               </span>
             </div>
-            <Button onClick={() => handleSignUpWithGoogle()} className="bg-transparent text-black border w-full mt-6 border-[#5C5C5C] text-base hover:bg-transparent ">
+            <Button
+              onClick={() => handleSignUpWithGoogle()}
+              className="bg-transparent text-black border w-full mt-6 border-[#5C5C5C] text-base hover:bg-transparent "
+            >
               <Image src={google} width={25} height={25} alt="google" />
               Signin with Google
             </Button>
@@ -168,7 +173,7 @@ const SignIn = () => {
         </div>
       </div>
       <div className="relative flex-1 hidden xl:flex">
-        <Image src={regImg} layout="fill" objectFit="cover" alt="image" />
+        <Image src={orgImg} layout="fill" objectFit="cover" alt="image" />
       </div>
     </div>
   );

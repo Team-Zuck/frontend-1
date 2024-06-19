@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Input } from "@/components/ui/input";
-import { footerImg, google as Google, logo, regImg } from "@/public";
+import { footerImg, google as Google, logo, orgImg, regImg } from "@/public";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import Link from "next/link";
@@ -101,7 +101,7 @@ const SignUp4 = () => {
         </div>
       </div>
       <div className="relative flex-1 hidden xl:flex">
-        <Image src={regImg} layout="fill" objectFit="cover" alt="image" />
+        <Image src={orgImg} layout="fill" objectFit="cover" alt="image" />
       </div>
     </div>
   );
