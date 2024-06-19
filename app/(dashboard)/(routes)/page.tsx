@@ -27,7 +27,7 @@ export default function Home() {
     <div className="w-full full">
       <div className="ml-[42px] flex flex-col justify-center items-start pt-[45px]">
         <h1 className="text-4xl font-semibold text-[#244469]">Dashboard</h1>
-        <p className="text-lg text-[#5C5C5C]">Here's your analytics</p>
+        <p className="text-lg text-[#5C5C5C]">Here&apos;s your analytics</p>
       </div>
 
       <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-7">
@@ -46,7 +46,7 @@ export default function Home() {
             <Button className="bg-white w-[80%] text-black flex gap-1">
               {" "}
               <Image src={todo} width={20} height={20} alt="people" />
-              Today's Task
+              Today&apos;s Task
             </Button>
             <Button className="w-[80%] bg-white text-black flex gap-1">
               <Image src={grid} width={20} height={20} alt="feed" />

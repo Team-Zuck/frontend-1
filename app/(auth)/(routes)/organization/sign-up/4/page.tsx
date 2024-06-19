@@ -69,15 +69,14 @@ const SignUp4 = () => {
 
           <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-md p-4 w-full text-center cursor-pointer ${
-              isDragActive ? "border-blue-500" : "border-gray-300"
-            }`}
+            className={`border-2 border-dashed rounded-md p-4 w-full text-center cursor-pointer ${isDragActive ? "border-blue-500" : "border-gray-300"
+              }`}
           >
             <input {...getInputProps()} />
             {isDragActive ? (
               <p>Drop the files here ...</p>
             ) : (
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
             )}
           </div>
 
