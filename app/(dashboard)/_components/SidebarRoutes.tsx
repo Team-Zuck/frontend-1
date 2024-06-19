@@ -10,15 +10,7 @@ const SidebarRoutes = () => {
   const isOrganizationPage = pathname?.includes("/organization");
   const navigate = useRouter()
   const routes = isOrganizationPage ? organizationRoutes : employeeRoutes;
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      navigate.push('/')
-    } catch (error) {
-      console.log(error);
-    }
 
-  };
   return (
     <div className="border border-dotted border-[#244469] h-[488px] rounded-[10px] py-[54px]">
       <div className="flex flex-col w-full gap-[10px]">
@@ -29,6 +21,9 @@ const SidebarRoutes = () => {
             label={route.label}
             href={route.route}
           />
+
+
+
         ))}
         <button>
 

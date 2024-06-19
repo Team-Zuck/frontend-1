@@ -45,9 +45,9 @@ const SignUp = () => {
 
 
 
-  useEffect(() => {
-    navigate.push('/application')
-  }, [user])
+  // useEffect(() => {
+  //   navigate.push('/application')
+  // }, [user])
 
   const navigate = useRouter();
   // 1. Define your form.
