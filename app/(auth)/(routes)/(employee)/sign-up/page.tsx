@@ -64,7 +64,6 @@ const SignUp = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    toast.success('Event has been created')
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {

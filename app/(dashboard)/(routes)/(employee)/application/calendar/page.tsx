@@ -186,7 +186,7 @@ const Calendar = () => {
       <div className="flex bg-white w-full justify-between pr-4 flex-col xl:flex-row">
         <div className="flex w-fit xl:w-[200px] gap-y-[17px] xl:pt-[63px] xl:flex-col">
           <Button className="bg-[#1B8FE3] w-full" onClick={() => handleFilterChange("all")}>All events</Button>
-          <Button className="bg-[#4CAF50] w-full" onClick={() => handleFilterChange("company")}>Company's Event</Button>
+          <Button className="bg-[#4CAF50] w-full" onClick={() => handleFilterChange("company")}>Company &apos; Event</Button>
           <Button className="bg-[#F15B64] w-full" onClick={() => handleFilterChange("scheduled")}>Scheduled Event</Button>
         </div>
         <div className="bg-white w-full xl:w-[70%] border border-dotted border-[#5C5C5C] px-[24px] py-[10px] rounded-[20px]">
@@ -246,7 +246,7 @@ const Calendar = () => {
                 className="border p-2 mr-2 rounded-lg"
               >
                 <option value="">Select Category</option>
-                <option value="company">Company's Event</option>
+                <option value="company">Company&apos;s Event</option>
                 <option value="scheduled">Scheduled Event</option>
               </select>
             </label>

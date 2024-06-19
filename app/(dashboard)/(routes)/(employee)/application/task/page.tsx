@@ -256,7 +256,7 @@ const Task = () => {
             <Button className="bg-white w-[80%] text-black flex gap-1">
               {" "}
               <Image src={todo} width={20} height={20} alt="people" />
-              Today's Task
+              Today&apos;s Task
             </Button>
             <Button className="w-[80%] bg-white text-black flex gap-1">
               <Image src={grid} width={20} height={20} alt="feed" />
