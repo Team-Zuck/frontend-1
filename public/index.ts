@@ -1,4 +1,5 @@
-import regImg from "./images/registerImg.avif";
+import regImg from "./images/registerImg.png";
+import orgImg from "./images/orgImg.png";
 import footerImg from "./images/footerImg.png";
 import logo from "./images/logo.png";
 import google from "./icons/google.svg";
@@ -65,4 +66,5 @@ export {
   arrowUp,
   arrowDown,
   orange,
+  orgImg,
 };
