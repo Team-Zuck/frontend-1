@@ -138,7 +138,7 @@ const Task = () => {
         <Link href="/application">
           <MoveLeft className="size-6 text-primary" />
         </Link>
-        <h1 className="text-lg text-[#244469]">Applications/Social</h1>
+        <h1 className="text-lg text-[#244469]">Applications/task</h1>
       </div>
       <div className="flex bg-white w-full justify-between xl:mt-[55px]  pr-4 flex-col xl:flex-row h-full pt-7">
         <div className="shadow-2xl w-[200px]">

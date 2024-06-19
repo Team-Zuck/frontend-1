@@ -26,6 +26,10 @@ import employees from "./icons/employees.svg";
 import salary from "./icons/salary.svg";
 import analysis from "./icons/analysis.svg";
 import trend from "./icons/trend.svg";
+import check from "./icons/check.svg";
+import circle1 from "./icons/circle-1.svg";
+import arrowUp from "./icons/arrow-up.svg";
+import arrowDown from "./icons/arrow-down.svg";
 export {
   regImg,
   footerImg,
@@ -55,4 +59,8 @@ export {
   salary,
   analysis,
   trend,
+  check,
+  circle1,
+  arrowUp,
+  arrowDown,
 };
