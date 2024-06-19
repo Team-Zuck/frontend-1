@@ -30,6 +30,7 @@ import check from "./icons/check.svg";
 import circle1 from "./icons/circle-1.svg";
 import arrowUp from "./icons/arrow-up.svg";
 import arrowDown from "./icons/arrow-down.svg";
+import orange from "./icons/orange.svg";
 export {
   regImg,
   footerImg,
@@ -63,4 +64,5 @@ export {
   circle1,
   arrowUp,
   arrowDown,
+  orange,
 };

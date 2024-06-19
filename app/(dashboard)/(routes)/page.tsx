@@ -1,6 +1,24 @@
 "use client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+
 import { Button } from "@/components/ui/button";
-import { arrowUp, bookMark, check, grid, task, todo, trend } from "@/public";
+import {
+  arrowUp,
+  bookMark,
+  check,
+  circle1,
+  grid,
+  orange,
+  task,
+  todo,
+} from "@/public";
 import Image from "next/image";
 import LineChart from "./organization/hr/_components/Chart";
 
@@ -68,9 +86,9 @@ export default function Home() {
             </div>
             <div className="w-[211px] h-[118px] rounded-[15px] bg-white shadow-md p-6">
               <div className="flex items-center">
-                <h2 className="text-[16px] font-medium">Finished</h2>
+                <h2 className="text-[16px] font-medium">Tracked</h2>
                 <Image
-                  src={check}
+                  src={circle1}
                   alt="icon"
                   width={20}
                   height={20}
@@ -78,17 +96,17 @@ export default function Home() {
                 />
               </div>
               <div className="flex items-center">
-                <h3 className="font-semibold text-[24px] mr-5">21</h3>
+                <h3 className="font-semibold text-[24px] mr-5">13h</h3>
                 <span className="flex">
-                  <Image src={arrowUp} alt="icon" width={15} height={15} /> +15
-                  tasks
+                  <Image src={arrowUp} alt="icon" width={15} height={15} /> -5
+                  hours
                 </span>
               </div>
               <p className="text-sm mt-2">Analytics for this month</p>
             </div>
             <div className="w-[211px] h-[118px] rounded-[15px] bg-white shadow-md p-6">
               <div className="flex items-center">
-                <h2 className="text-[16px] font-medium">Finished</h2>
+                <h2 className="text-[16px] font-medium">Efficiency</h2>
                 <Image
                   src={check}
                   alt="icon"
@@ -100,14 +118,57 @@ export default function Home() {
               <div className="flex items-center">
                 <h3 className="font-semibold text-[24px] mr-5">21</h3>
                 <span className="flex">
-                  <Image src={arrowUp} alt="icon" width={15} height={15} /> +15
-                  tasks
+                  <Image src={arrowUp} alt="icon" width={15} height={15} /> +35%
                 </span>
               </div>
               <p className="text-sm mt-2">Analytics for this month</p>
             </div>
           </div>
           <LineChart />
+
+          <div className="flex items-center mt-7 justify-between">
+            <div className="flex items-center gap-x-6">
+              <h4 className="text-[24px] font font-semibold">Current Tasks</h4>
+              <p className="text-[20px] font-semibold">Done 40%</p>
+            </div>
+            <div>
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select task" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">All task</SelectItem>
+                  <SelectItem value="dark">Some task</SelectItem>
+                  <SelectItem value="system">Maybe</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium flex gap-x-2">
+                  <Image src={task} width={15} height={15} alt="icon" />
+                  Product Review for servers
+                </TableCell>
+                <TableCell className="relative">
+                  <span>
+                    <Image
+                      src={orange}
+                      width={10}
+                      height={10}
+                      alt="icon"
+                      className="absolute left-0 bottom-5"
+                    />
+                  </span>
+                  In progress
+                </TableCell>
+                <TableCell>4h</TableCell>
+                <TableCell className="text-right font-bold">...</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       </div>
     </div>
