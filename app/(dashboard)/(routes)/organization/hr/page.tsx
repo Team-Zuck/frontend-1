@@ -17,7 +17,7 @@ const HR = () => {
           className=" w-[98%]  flex flex-wrap gap-2 p-8 "
           style={{ marginLeft: "2%" }}
         >
-          {hrCard.map((card, index) => (
+          {/* {hrCard.map((card, index) => (
             <Card
               key={index}
               icon={card.icon}
@@ -26,7 +26,7 @@ const HR = () => {
               trend={card.trend}
               text={card.text}
             />
-          ))}
+          ))} */}
         </div>
         <div>
           <LineChart />

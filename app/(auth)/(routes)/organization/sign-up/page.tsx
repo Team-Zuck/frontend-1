@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { footerImg, google as Google, logo, regImg } from "@/public";
+import { footerImg, google, logo, regImg } from "@/public";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import Link from "next/link";
@@ -197,7 +197,7 @@ const SignUp = () => {
               onClick={() => handleSignUpWithGoogle()}
               className="bg-transparent text-black border w-full mt-6 border-[#5C5C5C] text-base hover:bg-transparent "
             >
-              <Google />
+              <Image src={google} width={25} height={25} alt="google" />
               Signin with Google
             </Button>
             <div className="text-right mt-2">
